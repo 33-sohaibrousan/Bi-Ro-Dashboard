@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e8ac7035dfc440e4959720d5a183f69b" Name="Diagram1">
+        <EntityTypeShape EntityType="Bi_Ro_DashboardModel.Anime" Width="1.5" PointX="3" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Bi_Ro_DashboardModel.Book" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Bi_Ro_DashboardModel.Game" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="Bi_Ro_DashboardModel.Movie" Width="1.5" PointX="3" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Bi_Ro_DashboardModel.Music" Width="1.5" PointX="3" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Bi_Ro_DashboardModel.sysdiagram" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Bi_Ro_DashboardModel.User" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
+        <AssociationConnector Association="Bi_Ro_DashboardModel.FK_Animes_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="Bi_Ro_DashboardModel.FK_Book_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="Bi_Ro_DashboardModel.FK_Games_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="Bi_Ro_DashboardModel.FK_Movie_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="Bi_Ro_DashboardModel.FK_Musics_Users" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
