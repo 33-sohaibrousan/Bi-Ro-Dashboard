@@ -18,10 +18,10 @@ namespace BoSoDashboard.Models
         public string Nmae { get; set; }
         public Nullable<int> Episode { get; set; }
         public Nullable<int> Rating { get; set; }
-        public Nullable<int> UserId { get; set; }
+        public string UserId { get; set; }
         public Nullable<bool> isWatch { get; set; }
         public string AnimeImg { get; set; }
     
-        public virtual User User { get; set; }
+        public virtual AspNetUser AspNetUser { get; set; }
     }
 }

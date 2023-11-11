@@ -31,5 +31,7 @@ namespace BoSoDashboard.Models
         }
 
         public System.Data.Entity.DbSet<BoSoDashboard.Models.Anime> Animes { get; set; }
+
+        public System.Data.Entity.DbSet<BoSoDashboard.Models.User> Users1 { get; set; }
     }
 }

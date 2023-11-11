@@ -17,7 +17,7 @@ namespace BoSoDashboard.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
+        private Bi_Ro_DashboardEntities db = new Bi_Ro_DashboardEntities();
         public AccountController()
         {
         }
@@ -76,6 +76,8 @@ namespace BoSoDashboard.Controllers
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var user = await UserManager.FindByEmailAsync(model.Email);
+            Session["userid"] = db.AspNetUsers.Where(x => x.Email == model.Email).Select(x => x.Id).FirstOrDefault();
             switch (result)
             {
                 case SignInStatus.Success:

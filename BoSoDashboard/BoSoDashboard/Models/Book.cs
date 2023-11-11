@@ -19,8 +19,8 @@ namespace BoSoDashboard.Models
         public Nullable<int> NumSheet { get; set; }
         public Nullable<bool> IsRead { get; set; }
         public Nullable<int> Rating { get; set; }
-        public Nullable<int> UserId { get; set; }
+        public string UserId { get; set; }
     
-        public virtual User User { get; set; }
+        public virtual AspNetUser AspNetUser { get; set; }
     }
 }

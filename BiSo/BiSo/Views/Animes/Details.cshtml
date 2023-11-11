@@ -1,0 +1,66 @@
+﻿@model BiSo.Models.Anime
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Anime</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nmae)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nmae)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Episode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Episode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Rating)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Rating)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isWatch)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isWatch)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AnimeImg)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AnimeImg)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AspNetUser.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AspNetUser.Email)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

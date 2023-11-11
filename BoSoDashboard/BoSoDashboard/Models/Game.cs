@@ -18,9 +18,9 @@ namespace BoSoDashboard.Models
         public string Name { get; set; }
         public Nullable<bool> IsPlay { get; set; }
         public string GameImg { get; set; }
-        public Nullable<int> UserId { get; set; }
+        public string UserId { get; set; }
         public Nullable<int> Raiting { get; set; }
     
-        public virtual User User { get; set; }
+        public virtual AspNetUser AspNetUser { get; set; }
     }
 }

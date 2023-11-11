@@ -1,70 +1,180 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="Bi_Ro_DashboardModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="Bi_Ro_DashboardEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="C__MigrationHistory" EntityType="Bi_Ro_DashboardModel.C__MigrationHistory" />
+    <EntitySet Name="Animes" EntityType="Bi_Ro_DashboardModel.Anime" />
+    <EntitySet Name="AspNetRoles" EntityType="Bi_Ro_DashboardModel.AspNetRole" />
+    <EntitySet Name="AspNetUserClaims" EntityType="Bi_Ro_DashboardModel.AspNetUserClaim" />
+    <EntitySet Name="AspNetUserLogins" EntityType="Bi_Ro_DashboardModel.AspNetUserLogin" />
+    <EntitySet Name="AspNetUsers" EntityType="Bi_Ro_DashboardModel.AspNetUser" />
+    <EntitySet Name="Books" EntityType="Bi_Ro_DashboardModel.Book" />
+    <EntitySet Name="Games" EntityType="Bi_Ro_DashboardModel.Game" />
+    <EntitySet Name="Movies" EntityType="Bi_Ro_DashboardModel.Movy" />
+    <EntitySet Name="Musics" EntityType="Bi_Ro_DashboardModel.Music" />
+    <EntitySet Name="sysdiagrams" EntityType="Bi_Ro_DashboardModel.sysdiagram" />
+    <EntitySet Name="Users" EntityType="Bi_Ro_DashboardModel.User" />
+    <AssociationSet Name="FK_dbo_Animes_dbo_Users_UserId" Association="Bi_Ro_DashboardModel.FK_dbo_Animes_dbo_Users_UserId">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="Anime" EntitySet="Animes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Bi_Ro_DashboardModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Bi_Ro_DashboardModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Books_dbo_Users_UserId" Association="Bi_Ro_DashboardModel.FK_dbo_Books_dbo_Users_UserId">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="Book" EntitySet="Books" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Movies_dbo_Users_UserId" Association="Bi_Ro_DashboardModel.FK_dbo_Movies_dbo_Users_UserId">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="Movy" EntitySet="Movies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Musics_dbo_Users_UserId" Association="Bi_Ro_DashboardModel.FK_dbo_Musics_dbo_Users_UserId">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="Music" EntitySet="Musics" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Games_AspNetUsers" Association="Bi_Ro_DashboardModel.FK_Games_AspNetUsers">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="Game" EntitySet="Games" />
+    </AssociationSet>
+    <AssociationSet Name="AspNetUserRoles" Association="Bi_Ro_DashboardModel.AspNetUserRoles">
+      <End Role="AspNetRole" EntitySet="AspNetRoles" />
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="C__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+    <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+  </EntityType>
   <EntityType Name="Anime">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" />
-    <Property Name="Nmae" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nmae" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Episode" Type="Int32" />
     <Property Name="Rating" Type="Int32" />
-    <Property Name="UserId" Type="Int32" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="isWatch" Type="Boolean" />
-    <Property Name="AnimeImg" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="User" Relationship="Self.FK_Animes_Users" FromRole="Animes" ToRole="Users" />
+    <Property Name="AnimeImg" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="Bi_Ro_DashboardModel.FK_dbo_Animes_dbo_Users_UserId" FromRole="Anime" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="AspNetRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUsers" Relationship="Bi_Ro_DashboardModel.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaim">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="Bi_Ro_DashboardModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaim" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogin">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="Bi_Ro_DashboardModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogin" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="AspNetUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+    <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Animes" Relationship="Bi_Ro_DashboardModel.FK_dbo_Animes_dbo_Users_UserId" FromRole="AspNetUser" ToRole="Anime" />
+    <NavigationProperty Name="AspNetUserClaims" Relationship="Bi_Ro_DashboardModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
+    <NavigationProperty Name="AspNetUserLogins" Relationship="Bi_Ro_DashboardModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
+    <NavigationProperty Name="Books" Relationship="Bi_Ro_DashboardModel.FK_dbo_Books_dbo_Users_UserId" FromRole="AspNetUser" ToRole="Book" />
+    <NavigationProperty Name="Movies" Relationship="Bi_Ro_DashboardModel.FK_dbo_Movies_dbo_Users_UserId" FromRole="AspNetUser" ToRole="Movy" />
+    <NavigationProperty Name="Musics" Relationship="Bi_Ro_DashboardModel.FK_dbo_Musics_dbo_Users_UserId" FromRole="AspNetUser" ToRole="Music" />
+    <NavigationProperty Name="Games" Relationship="Bi_Ro_DashboardModel.FK_Games_AspNetUsers" FromRole="AspNetUser" ToRole="Game" />
+    <NavigationProperty Name="AspNetRoles" Relationship="Bi_Ro_DashboardModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
   </EntityType>
   <EntityType Name="Book">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="NumSheet" Type="Int32" />
     <Property Name="IsRead" Type="Boolean" />
     <Property Name="Rating" Type="Int32" />
-    <Property Name="UserId" Type="Int32" />
-    <NavigationProperty Name="User" Relationship="Self.FK_Book_Users" FromRole="Book" ToRole="Users" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="Bi_Ro_DashboardModel.FK_dbo_Books_dbo_Users_UserId" FromRole="Book" ToRole="AspNetUser" />
   </EntityType>
   <EntityType Name="Game">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" />
-    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="IsPlay" Type="Boolean" />
-    <Property Name="GameImg" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="UserId" Type="Int32" />
+    <Property Name="GameImg" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="Raiting" Type="Int32" />
-    <NavigationProperty Name="User" Relationship="Self.FK_Games_Users" FromRole="Games" ToRole="Users" />
+    <NavigationProperty Name="AspNetUser" Relationship="Bi_Ro_DashboardModel.FK_Games_AspNetUsers" FromRole="Game" ToRole="AspNetUser" />
   </EntityType>
-  <EntityType Name="Movie">
+  <EntityType Name="Movy">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" />
-    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Duration" Type="Int32" />
-    <Property Name="MovieImg" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="UserId" Type="Int32" />
+    <Property Name="MovieImg" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="IsWatch" Type="Boolean" />
-    <NavigationProperty Name="User" Relationship="Self.FK_Movie_Users" FromRole="Movie" ToRole="Users" />
+    <NavigationProperty Name="AspNetUser" Relationship="Bi_Ro_DashboardModel.FK_dbo_Movies_dbo_Users_UserId" FromRole="Movy" ToRole="AspNetUser" />
   </EntityType>
   <EntityType Name="Music">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" />
-    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Duration" Type="Int32" />
-    <Property Name="UserId" Type="Int32" />
-    <Property Name="Language" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="User" Relationship="Self.FK_Musics_Users" FromRole="Musics" ToRole="Users" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Language" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="Bi_Ro_DashboardModel.FK_dbo_Musics_dbo_Users_UserId" FromRole="Music" ToRole="AspNetUser" />
   </EntityType>
   <EntityType Name="sysdiagram">
     <Key>
       <PropertyRef Name="diagram_id" />
     </Key>
-    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="principal_id" Type="Int32" Nullable="false" />
     <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="version" Type="Int32" />
@@ -75,32 +185,55 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Image" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="aspuserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Animes" Relationship="Self.FK_Animes_Users" FromRole="Users" ToRole="Animes" />
-    <NavigationProperty Name="Books" Relationship="Self.FK_Book_Users" FromRole="Users" ToRole="Book" />
-    <NavigationProperty Name="Games" Relationship="Self.FK_Games_Users" FromRole="Users" ToRole="Games" />
-    <NavigationProperty Name="Movies" Relationship="Self.FK_Movie_Users" FromRole="Users" ToRole="Movie" />
-    <NavigationProperty Name="Musics" Relationship="Self.FK_Musics_Users" FromRole="Users" ToRole="Musics" />
   </EntityType>
-  <Association Name="FK_Animes_Users">
-    <End Role="Users" Type="Self.User" Multiplicity="0..1" />
-    <End Role="Animes" Type="Self.Anime" Multiplicity="*" />
+  <Association Name="FK_dbo_Animes_dbo_Users_UserId">
+    <End Type="Bi_Ro_DashboardModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+    <End Type="Bi_Ro_DashboardModel.Anime" Role="Anime" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Users">
+      <Principal Role="AspNetUser">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Animes">
+      <Dependent Role="Anime">
         <PropertyRef Name="UserId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Book_Users">
-    <End Role="Users" Type="Self.User" Multiplicity="0..1" />
-    <End Role="Book" Type="Self.Book" Multiplicity="*" />
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Type="Bi_Ro_DashboardModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="Bi_Ro_DashboardModel.AspNetUserClaim" Role="AspNetUserClaim" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Users">
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaim">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Type="Bi_Ro_DashboardModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="Bi_Ro_DashboardModel.AspNetUserLogin" Role="AspNetUserLogin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogin">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Books_dbo_Users_UserId">
+    <End Type="Bi_Ro_DashboardModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+    <End Type="Bi_Ro_DashboardModel.Book" Role="Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Book">
@@ -108,110 +241,44 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Games_Users">
-    <End Role="Users" Type="Self.User" Multiplicity="0..1" />
-    <End Role="Games" Type="Self.Game" Multiplicity="*" />
+  <Association Name="FK_dbo_Movies_dbo_Users_UserId">
+    <End Type="Bi_Ro_DashboardModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+    <End Type="Bi_Ro_DashboardModel.Movy" Role="Movy" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Users">
+      <Principal Role="AspNetUser">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Games">
+      <Dependent Role="Movy">
         <PropertyRef Name="UserId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Movie_Users">
-    <End Role="Users" Type="Self.User" Multiplicity="0..1" />
-    <End Role="Movie" Type="Self.Movie" Multiplicity="*" />
+  <Association Name="FK_dbo_Musics_dbo_Users_UserId">
+    <End Type="Bi_Ro_DashboardModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+    <End Type="Bi_Ro_DashboardModel.Music" Role="Music" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Users">
+      <Principal Role="AspNetUser">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Movie">
+      <Dependent Role="Music">
         <PropertyRef Name="UserId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Musics_Users">
-    <End Role="Users" Type="Self.User" Multiplicity="0..1" />
-    <End Role="Musics" Type="Self.Music" Multiplicity="*" />
+  <Association Name="FK_Games_AspNetUsers">
+    <End Type="Bi_Ro_DashboardModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+    <End Type="Bi_Ro_DashboardModel.Game" Role="Game" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Users">
+      <Principal Role="AspNetUser">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Musics">
+      <Dependent Role="Game">
         <PropertyRef Name="UserId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="Bi_Ro_DashboardEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="Animes" EntityType="Self.Anime" />
-    <EntitySet Name="Books" EntityType="Self.Book" />
-    <EntitySet Name="Games" EntityType="Self.Game" />
-    <EntitySet Name="Movies" EntityType="Self.Movie" />
-    <EntitySet Name="Musics" EntityType="Self.Music" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
-    <EntitySet Name="Users" EntityType="Self.User" />
-    <AssociationSet Name="FK_Animes_Users" Association="Self.FK_Animes_Users">
-      <End Role="Users" EntitySet="Users" />
-      <End Role="Animes" EntitySet="Animes" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Book_Users" Association="Self.FK_Book_Users">
-      <End Role="Users" EntitySet="Users" />
-      <End Role="Book" EntitySet="Books" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Games_Users" Association="Self.FK_Games_Users">
-      <End Role="Users" EntitySet="Users" />
-      <End Role="Games" EntitySet="Games" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Movie_Users" Association="Self.FK_Movie_Users">
-      <End Role="Users" EntitySet="Users" />
-      <End Role="Movie" EntitySet="Movies" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Musics_Users" Association="Self.FK_Musics_Users">
-      <End Role="Users" EntitySet="Users" />
-      <End Role="Musics" EntitySet="Musics" />
-    </AssociationSet>
-    <FunctionImport Name="sp_alterdiagram">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-      <Parameter Name="version" Mode="In" Type="Int32" />
-      <Parameter Name="definition" Mode="In" Type="Binary" />
-    </FunctionImport>
-    <FunctionImport Name="sp_creatediagram">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-      <Parameter Name="version" Mode="In" Type="Int32" />
-      <Parameter Name="definition" Mode="In" Type="Binary" />
-    </FunctionImport>
-    <FunctionImport Name="sp_dropdiagram">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(Bi_Ro_DashboardModel.sp_helpdiagramdefinition_Result)">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(Bi_Ro_DashboardModel.sp_helpdiagrams_Result)">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="sp_renamediagram">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-      <Parameter Name="new_diagramname" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="sp_upgraddiagrams" />
-  </EntityContainer>
-  <ComplexType Name="sp_helpdiagramdefinition_Result">
-    <Property Type="Int32" Name="version" Nullable="true" />
-    <Property Type="Binary" Name="definition" Nullable="true" />
-  </ComplexType>
-  <ComplexType Name="sp_helpdiagrams_Result">
-    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
-    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
-    <Property Type="Int32" Name="ID" Nullable="false" />
-    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
-    <Property Type="Int32" Name="OwnerID" Nullable="false" />
-  </ComplexType>
+  <Association Name="AspNetUserRoles">
+    <End Type="Bi_Ro_DashboardModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
+    <End Type="Bi_Ro_DashboardModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+  </Association>
 </Schema>
