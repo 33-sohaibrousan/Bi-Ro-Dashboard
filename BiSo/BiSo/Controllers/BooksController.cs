@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity;
 
 namespace BiSo.Controllers
 {
+    [Authorize]
     public class BooksController : Controller
     {
         private Bi_Ro_DashboardEntities db = new Bi_Ro_DashboardEntities();
