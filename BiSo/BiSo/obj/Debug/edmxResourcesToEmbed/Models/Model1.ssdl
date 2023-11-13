@@ -115,6 +115,7 @@
     <Property Name="Duration" Type="int" />
     <Property Name="UserId" Type="nvarchar" MaxLength="128" />
     <Property Name="Language" Type="nvarchar(max)" />
+    <Property Name="Audio" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>

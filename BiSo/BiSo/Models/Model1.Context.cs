@@ -13,10 +13,10 @@ namespace BiSo.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Bi_Ro_DashboardEntities : DbContext
+    public partial class Bi_Ro_DashboardEntities1 : DbContext
     {
-        public Bi_Ro_DashboardEntities()
-            : base("name=Bi_Ro_DashboardEntities")
+        public Bi_Ro_DashboardEntities1()
+            : base("name=Bi_Ro_DashboardEntities1")
         {
         }
     
@@ -35,7 +35,7 @@ namespace BiSo.Models
         public virtual DbSet<Game> Games { get; set; }
         public virtual DbSet<Movy> Movies { get; set; }
         public virtual DbSet<Music> Musics { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }

@@ -123,16 +123,7 @@
     <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="Language" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_Musics_dbo_Users_UserId" FromRole="Musics" ToRole="AspNetUsers" />
-  </EntityType>
-  <EntityType Name="sysdiagram">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="principal_id" Type="Int32" Nullable="false" />
-    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="version" Type="Int32" />
-    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="Audio" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="User">
     <Key>
@@ -235,7 +226,7 @@
     <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
     <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
   </Association>
-  <EntityContainer Name="Bi_Ro_DashboardEntities" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="Bi_Ro_DashboardEntities1" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
     <EntitySet Name="Animes" EntityType="Self.Anime" />
     <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
@@ -246,7 +237,6 @@
     <EntitySet Name="Games" EntityType="Self.Game" />
     <EntitySet Name="Movies" EntityType="Self.Movy" />
     <EntitySet Name="Musics" EntityType="Self.Music" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
     <EntitySet Name="Users" EntityType="Self.User" />
     <AssociationSet Name="FK_dbo_Animes_dbo_Users_UserId" Association="Self.FK_dbo_Animes_dbo_Users_UserId">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -280,5 +270,16 @@
       <End Role="AspNetRoles" EntitySet="AspNetRoles" />
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
     </AssociationSet>
+    <EntitySet Name="sysdiagrams" EntityType="Bi_Ro_DashboardModel.sysdiagram" />
   </EntityContainer>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
 </Schema>

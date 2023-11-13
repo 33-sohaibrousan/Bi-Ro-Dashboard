@@ -19,6 +19,7 @@ namespace BiSo.Models
         public Nullable<int> Duration { get; set; }
         public string UserId { get; set; }
         public string Language { get; set; }
+        public string Audio { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
     }

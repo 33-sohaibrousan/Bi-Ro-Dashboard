@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="2dbfaa57e594486cb31ae9e469e877d9" Name="Diagram1">
+      <Diagram DiagramId="0a68bf81c4a64cbb845bdebbb40dec51" Name="Diagram1">
         <EntityTypeShape EntityType="Bi_Ro_DashboardModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Bi_Ro_DashboardModel.Anime" Width="1.5" PointX="5.25" PointY="1.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Bi_Ro_DashboardModel.AspNetRole" Width="1.5" PointX="0.75" PointY="11.125" IsExpanded="true" />
@@ -15,8 +15,7 @@
         <EntityTypeShape EntityType="Bi_Ro_DashboardModel.Game" Width="1.5" PointX="5.25" PointY="13.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Bi_Ro_DashboardModel.Movy" Width="1.5" PointX="5.25" PointY="16.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Bi_Ro_DashboardModel.Music" Width="1.5" PointX="5.25" PointY="19.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Bi_Ro_DashboardModel.sysdiagram" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Bi_Ro_DashboardModel.User" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Bi_Ro_DashboardModel.User" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
         <AssociationConnector Association="Bi_Ro_DashboardModel.FK_dbo_Animes_dbo_Users_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="Bi_Ro_DashboardModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="Bi_Ro_DashboardModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
@@ -25,6 +24,7 @@
         <AssociationConnector Association="Bi_Ro_DashboardModel.FK_dbo_Musics_dbo_Users_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="Bi_Ro_DashboardModel.FK_Games_AspNetUsers" ManuallyRouted="false" />
         <AssociationConnector Association="Bi_Ro_DashboardModel.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Bi_Ro_DashboardModel.sysdiagram" Width="1.5" PointX="0.75" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Xml.Linq;
 using BiSo.Models;
 using Microsoft.AspNet.Identity;
 
@@ -14,7 +16,7 @@ namespace BiSo.Controllers
     [Authorize]
     public class GamesController : Controller
     {
-        private Bi_Ro_DashboardEntities db = new Bi_Ro_DashboardEntities();
+        private Bi_Ro_DashboardEntities1 db = new Bi_Ro_DashboardEntities1();
 
         // GET: Games
         public ActionResult Index()
@@ -51,10 +53,19 @@ namespace BiSo.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,IsPlay,GameImg,UserId,Raiting")] Game game)
+        public ActionResult Create([Bind(Include = "Id,Name,IsPlay,GameImg,UserId,Raiting")] Game game , HttpPostedFileBase GameImg)
         {
             if (ModelState.IsValid)
             {
+                string folderPath = Server.MapPath("~/Content/Images");
+                if (!Directory.Exists(folderPath))
+                {
+                    Directory.CreateDirectory(folderPath);
+                }
+                string fileName = Path.GetFileName(GameImg.FileName);
+                string path = Path.Combine(folderPath, fileName);
+                GameImg.SaveAs(path);
+                game.GameImg = "../Content/Images/" + fileName;
                 db.Games.Add(game);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -85,10 +96,19 @@ namespace BiSo.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,IsPlay,GameImg,UserId,Raiting")] Game game)
+        public ActionResult Edit([Bind(Include = "Id,Name,IsPlay,GameImg,UserId,Raiting")] Game game, HttpPostedFileBase GameImg)
         {
             if (ModelState.IsValid)
             {
+                string folderPath = Server.MapPath("~/Content/Images");
+                if (!Directory.Exists(folderPath))
+                {
+                    Directory.CreateDirectory(folderPath);
+                }
+                string fileName = Path.GetFileName(GameImg.FileName);
+                string path = Path.Combine(folderPath, fileName);
+                GameImg.SaveAs(path);
+                game.GameImg = "../Content/Images/" + fileName;
                 db.Entry(game).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

@@ -1,16 +1,19 @@
 ﻿using BiSo.Models;
 using Microsoft.AspNet.Identity;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
+using System.Web.Services.Description;
 
 namespace BiSo.Controllers
 {
     [Authorize]
     public class AnimesController : Controller
     {
-        private Bi_Ro_DashboardEntities db = new Bi_Ro_DashboardEntities();
+        private Bi_Ro_DashboardEntities1 db = new Bi_Ro_DashboardEntities1();
 
         // GET: Animes
         public ActionResult Index()
@@ -47,11 +50,21 @@ namespace BiSo.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nmae,Episode,Rating,UserId,isWatch,AnimeImg")] Anime anime)
+        public ActionResult Create([Bind(Include = "Id,Nmae,Episode,Rating,UserId,isWatch,AnimeImg")] Anime anime, HttpPostedFileBase AnimeImg)
         {
             if (ModelState.IsValid)
             {
-                db.Animes.Add(anime);
+                string folderPath = Server.MapPath("~/Content/Images");
+                if (!Directory.Exists(folderPath))
+                {
+                    Directory.CreateDirectory(folderPath);
+                }
+                string fileName = Path.GetFileName(AnimeImg.FileName);
+                string path = Path.Combine(folderPath, fileName);
+                AnimeImg.SaveAs(path);
+                anime.AnimeImg = "../Content/Images/" + fileName;
+              
+            db.Animes.Add(anime);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -81,10 +94,19 @@ namespace BiSo.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nmae,Episode,Rating,UserId,isWatch,AnimeImg")] Anime anime)
+        public ActionResult Edit([Bind(Include = "Id,Nmae,Episode,Rating,UserId,isWatch,AnimeImg")] Anime anime, HttpPostedFileBase AnimeImg)
         {
             if (ModelState.IsValid)
             {
+                string folderPath = Server.MapPath("~/Content/Images");
+                if (!Directory.Exists(folderPath))
+                {
+                    Directory.CreateDirectory(folderPath);
+                }
+                string fileName = Path.GetFileName(AnimeImg.FileName);
+                string path = Path.Combine(folderPath, fileName);
+                AnimeImg.SaveAs(path);
+                anime.AnimeImg = "../Content/Images/" + fileName;
                 db.Entry(anime).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

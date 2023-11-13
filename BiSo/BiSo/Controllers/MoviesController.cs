@@ -15,7 +15,7 @@ namespace BiSo.Controllers
 
     public class MoviesController : Controller
     {
-        private Bi_Ro_DashboardEntities db = new Bi_Ro_DashboardEntities();
+        private Bi_Ro_DashboardEntities1 db = new Bi_Ro_DashboardEntities1();
 
         // GET: Movies
         public ActionResult Index()

@@ -34,15 +34,13 @@
             </div>
         </div>
     </div>
-
     <div class="form-group">
         @Html.LabelFor(model => model.GameImg, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.TextBoxFor(model => model.GameImg, new { type = "file", accept = "image/*", @class = "form-control", id = "GameImg" })
-            @Html.ValidationMessageFor(model => model.GameImg, "", new { @class = "text-danger" })
+            <input accept="image/*" class="form-control" id="GameImg" name="GameImg" type="file">
+            @Html.ValidationMessageFor(model => model.GameImg, "", new { @class = "text-danger" })  
         </div>
     </div>
-
     <div class="form-group">
         @Html.LabelFor(model => model.UserId, "UserId", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">

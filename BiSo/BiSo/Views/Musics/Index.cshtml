@@ -23,7 +23,9 @@
         <th>
             @Html.DisplayNameFor(model => model.AspNetUser.Email)
         </th>
-        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.Audio)
+        </th>
     </tr>
 
 @foreach (var item in Model) {
@@ -41,9 +43,15 @@
             @Html.DisplayFor(modelItem => item.AspNetUser.Email)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            <audio controls>
+                <source src="~/Content/@item.Audio" type="audio/mpeg">
+            </audio>
+        </td>
+
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
         </td>
     </tr>
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -15,7 +16,7 @@ namespace BiSo.Controllers
 
     public class MusicsController : Controller
     {
-        private Bi_Ro_DashboardEntities db = new Bi_Ro_DashboardEntities();
+        private Bi_Ro_DashboardEntities1 db = new Bi_Ro_DashboardEntities1();
 
         // GET: Musics
         public ActionResult Index()
@@ -52,10 +53,20 @@ namespace BiSo.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Duration,UserId,Language")] Music music)
+        public ActionResult Create([Bind(Include = "Id,Name,Duration,UserId,Language,Audio")] Music music , HttpPostedFileBase Audio)
         {
             if (ModelState.IsValid)
             {
+                string folderPath = Server.MapPath("~/Content/Audio");
+                if (!Directory.Exists(folderPath))
+                {
+                    Directory.CreateDirectory(folderPath);
+                }
+                string fileName = Path.GetFileName(Audio.FileName); 
+                string path = Path.Combine(folderPath, fileName);
+                Audio.SaveAs(path);
+                music.Audio = "../Content/Audio/" + fileName;
+
                 db.Musics.Add(music);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -86,10 +97,19 @@ namespace BiSo.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Duration,UserId,Language")] Music music)
+        public ActionResult Edit([Bind(Include = "Id,Name,Duration,UserId,Language,Audio")] Music music, HttpPostedFileBase Audio)
         {
             if (ModelState.IsValid)
             {
+                string folderPath = Server.MapPath("~/Content/Audio");
+                if (!Directory.Exists(folderPath))
+                {
+                    Directory.CreateDirectory(folderPath);
+                }
+                string fileName = Path.GetFileName(Audio.FileName);
+                string path = Path.Combine(folderPath, fileName);
+                Audio.SaveAs(path);
+                music.Audio = "../Content/Audio/" + fileName;
                 db.Entry(music).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
